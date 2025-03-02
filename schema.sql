@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS contacts;
+
+CREATE TABLE contacts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    emails JSON
+);

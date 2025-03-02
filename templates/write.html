@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block content %}
+<div class="content-header">
+  {% if not contact %}
+  <p>Adding a new contact</p>
+  {% else %}
+  <p>Editing contact</p>
+  {% endif %}
+</div>
+<form method="post" class="contact-form">
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">First Name</label>
+      <input
+        required
+        type="text"
+        name="firstname"
+        class="form-control"
+        value="{{request.form['firstname'] if request.method == 'POST' else contact[2] if contact else ''}}"
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Last Name</label>
+      <input
+        required
+        type="text"
+        name="lastname"
+        class="form-control"
+        value="{{request.form['lastname'] if request.method == 'POST' else contact[3] if contact else ''}}"
+      />
+    </div>
+  </div>
+  {% if contact %}
+  <div class="form-group">
+    <label class="form-label">Email</label>
+    <div class="email-list">
+      {% for email in emails %}
+      <div class="email-item">
+        <p class="email-text">{{ email }}</p>
+        <a
+          href="{{ url_for('delete_email', contact_id=contact[0], email_index=loop.index0) }}"
+          class="delete-email-btn"
+          >-</a
+        >
+      </div>
+      {% endfor %}
+
+      <a href="#" class="add-email-link" id="addEmailBtn">
+        <span>+</span>add email
+      </a>
+
+      <div id="emailInputContainer" style="display: none; margin-top: 8px">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          placeholder="Add email address"
+          value="{{request.form['email']}}"
+          style="width: 50%"
+        />
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="form-actions">
+    {% if contact %}
+    <a href="{{ url_for('delete', id=contact[0]) }}" class="btn btn-delete"
+      >Delete</a
+    >
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="btn btn-cancel">Cancel</a>
+    <button type="submit" class="btn btn-save">Save</button>
+  </div>
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const addEmailBtn = document.getElementById("addEmailBtn");
+    const emailInputContainer = document.getElementById("emailInputContainer");
+    const emailInput = emailInputContainer.querySelector("input");
+
+    addEmailBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      emailInputContainer.style.display = "block";
+      emailInput.focus();
+    });
+
+    // Hide email input when clicking outside
+    document.addEventListener("click", function (e) {
+      if (
+        !emailInputContainer.contains(e.target) &&
+        e.target !== addEmailBtn &&
+        !addEmailBtn.contains(e.target)
+      ) {
+        if (emailInput.value.trim() === "") {
+          emailInputContainer.style.display = "none";
+        }
+      }
+    });
+
+    // Handle form submission
+    emailInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (emailInput.value.trim() !== "") {
+          emailInput.form.submit();
+          emailInput.value = "";
+        }
+      }
+    });
+    // Clear the input field when the form is submitted
+    document
+      .querySelector(".contact-form")
+      .addEventListener("submit", function (e) {
+        if (emailInput.value.trim() !== "") {
+          emailInput.value = ""; // Clear the input field after submission
+        }
+      });
+  });
+</script>
+{% endblock %}

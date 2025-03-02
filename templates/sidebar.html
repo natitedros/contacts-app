@@ -1,0 +1,47 @@
+<div class="sidebar-header">
+  <h1>Contacts</h1>
+  <a href="{{ url_for('add') }}" class="add-contact-btn" id="add-contact">+</a>
+  <a href="{{ url_for('sort_contacts') }}" class="sort-btn">
+    <!-- Placeholder for custom SVG -->
+    <span class="sort-icon">=+=</span>
+  </a>
+</div>
+
+<ul class="contact-list">
+  {% for contact in contacts %}
+  <li
+    class="contact-item {% if request.endpoint == 'edit_contact' and request.view_args.id == contact[0] %}active{% endif %}"
+    data-contact-id="{{ contact[0] }}"
+    onclick="handleContactClick(this, '{{ url_for('edit_contact', id=contact[0]) | safe }}')"
+  >
+    {{ contact[2] }} {{ contact[3] }}
+  </li>
+  {% endfor %}
+</ul>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const contactItems = document.querySelectorAll(".contact-item");
+    const addContactBtn = document.getElementById("add-contact");
+
+    function removeActiveClasses() {
+      contactItems.forEach((item) => item.classList.remove("active"));
+    }
+
+    // Define handleContactClick function
+    window.handleContactClick = function (element, editUrl) {
+      removeActiveClasses();
+      element.classList.add("active");
+      window.location.href = editUrl; // Navigate to the edit contact page
+    };
+
+    // Handle "Add Contact" click
+    if (addContactBtn) {
+      addContactBtn.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link action
+        removeActiveClasses();
+        window.location.href = this.href; // Navigate to add contact page
+      });
+    }
+  });
+</script>

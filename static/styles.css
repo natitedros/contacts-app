@@ -1,0 +1,234 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 20%;
+  background-color: rgb(240, 247, 251);
+  height: 100vh;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.add-contact-btn {
+  width: 24px;
+  height: 24px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.sort-btn {
+  text-decoration: none;
+  font-size: 18px;
+  color: #4285f4;
+  padding: 5px 5px;
+  border: 1px solid #4285f4;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sort-btn:hover {
+  background-color: #4285f4;
+  color: #fff;
+}
+
+.sort-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Replace the placeholder with a custom SVG */
+.sort-btn .sort-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("./sort-list.svg");
+  /* Add the path to your SVG file */
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-indent: -9999px; /* Hide the placeholder text */
+}
+
+.contact-list {
+  list-style: none;
+}
+
+.contact-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-item:hover {
+  background-color: #f0f0f0;
+}
+
+.contact-item.active {
+  background-color: #4285f4;
+  color: white;
+}
+
+/* Content area styles */
+.content {
+  flex: 1;
+  padding: 30px;
+  background-color: white;
+}
+
+.content-header {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+
+/* Email section styles */
+.email-list {
+  margin-top: 8px;
+}
+
+.email-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  margin: 4px;
+}
+
+.email-text {
+  font-size: 14px;
+  color: #333;
+  margin-right: 4px;
+}
+
+.delete-email-btn {
+  display: none;
+  text-decoration: none;
+  width: 20px;
+  height: 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.email-item:hover .delete-email-btn {
+  display: flex;
+}
+
+.add-email-link {
+  display: inline-flex;
+  align-items: center;
+  color: #4285f4;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.add-email-link span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #4285f4;
+  color: white;
+  border-radius: 50%;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+/* Action buttons */
+.form-actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  margin-right: auto;
+}
+
+.btn-cancel {
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-save {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+}
