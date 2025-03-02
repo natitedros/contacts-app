@@ -114,3 +114,7 @@ def sort_contacts():
     else:
         global_data["order_by"] = 'created'
     return redirect(url_for('index'))
+
+
+if __name__ == "__main__":
+    app.run()
